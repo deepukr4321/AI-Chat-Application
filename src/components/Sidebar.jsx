@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import { useChat } from '../contexts/ChatContext.jsx';
-import { exportChatAsJSON } from '../utils/export.js';
+import React, { useState } from "react";
+import { useChat } from "../contexts/ChatContext.jsx";
+import { exportChatAsJSON } from "../utils/export.js";
 
 const Sidebar = ({ isOpen, onClose }) => {
   const { state, actions } = useChat();
   const [editingSessionId, setEditingSessionId] = useState(null);
-  const [editTitle, setEditTitle] = useState('');
+  const [editTitle, setEditTitle] = useState("");
 
   const handleCreateNewChat = () => {
     actions.createSession();
@@ -17,7 +17,7 @@ const Sidebar = ({ isOpen, onClose }) => {
 
   const handleDeleteSession = (sessionId, e) => {
     e.stopPropagation();
-    if (window.confirm('Are you sure you want to delete this chat?')) {
+    if (window.confirm("Are you sure you want to delete this chat?")) {
       actions.deleteSession(sessionId);
     }
   };
@@ -33,12 +33,12 @@ const Sidebar = ({ isOpen, onClose }) => {
       actions.updateSession(sessionId, { title: editTitle.trim() });
     }
     setEditingSessionId(null);
-    setEditTitle('');
+    setEditTitle("");
   };
 
   const cancelEdit = () => {
     setEditingSessionId(null);
-    setEditTitle('');
+    setEditTitle("");
   };
 
   const handleExport = (session, e) => {
@@ -59,14 +59,16 @@ const Sidebar = ({ isOpen, onClose }) => {
       {/* Sidebar */}
       <div
         className={`fixed inset-y-0 left-0 z-30 w-80 bg-white border-r border-gray-200 transform transition-transform lg:translate-x-0 lg:static lg:z-auto ${
-          isOpen ? 'translate-x-0' : '-translate-x-full'
+          isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
         <div className="flex flex-col h-full">
           {/* Header */}
           <div className="p-4 border-b border-gray-200">
             <div className="flex items-center justify-between">
-              <h2 className="text-lg font-semibold text-gray-800">Chat Sessions</h2>
+              <h2 className="text-lg font-semibold text-gray-800">
+                Chat Sessions
+              </h2>
               <button
                 onClick={handleCreateNewChat}
                 className="px-3 py-1 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors text-sm"
@@ -89,8 +91,8 @@ const Sidebar = ({ isOpen, onClose }) => {
                     key={session.id}
                     className={`p-3 rounded-lg mb-2 cursor-pointer transition-colors ${
                       state.activeSession === session.id
-                        ? 'bg-blue-50 border border-blue-200'
-                        : 'hover:bg-gray-50'
+                        ? "bg-blue-50 border border-blue-200"
+                        : "hover:bg-gray-50"
                     }`}
                     onClick={() => handleSessionClick(session.id)}
                   >
@@ -102,8 +104,8 @@ const Sidebar = ({ isOpen, onClose }) => {
                           onChange={(e) => setEditTitle(e.target.value)}
                           onBlur={() => saveEdit(session.id)}
                           onKeyDown={(e) => {
-                            if (e.key === 'Enter') saveEdit(session.id);
-                            if (e.key === 'Escape') cancelEdit();
+                            if (e.key === "Enter") saveEdit(session.id);
+                            if (e.key === "Escape") cancelEdit();
                           }}
                           className="flex-1 px-2 py-1 text-sm border border-gray-300 rounded focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
                           autoFocus
@@ -128,7 +130,7 @@ const Sidebar = ({ isOpen, onClose }) => {
                             {session.title}
                           </h3>
                           <p className="text-xs text-gray-500">
-                            {session.messages.length} messages •{' '}
+                            {session.messages.length} messages •{" "}
                             {new Date(session.updatedAt).toLocaleDateString()}
                           </p>
                         </div>
@@ -178,7 +180,7 @@ const Sidebar = ({ isOpen, onClose }) => {
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                 />
                 <p className="text-xs text-gray-500 mt-1">
-                  Get your free API key from{' '}
+                  Get your free API key from{" "}
                   <a
                     href="https://aistudio.google.com/app/apikey"
                     target="_blank"
